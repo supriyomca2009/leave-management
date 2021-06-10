@@ -120,13 +120,18 @@ namespace leave_management.Controllers
         // GET: LeaveTypes/Delete/5
         public ActionResult Delete(int id)
         {
-             if(!_repo.isExists(id))
+            var leavetype = _repo.FindById(id);
+            if (leavetype == null)
             {
                 return NotFound();
             }
-            var leavetype = _repo.FindById(id);
-            var model = _mapper.Map<LeaveTypeVM>(leavetype);
-            return View(model);
+            var isSuccess = _repo.Delete(leavetype);
+            if (!isSuccess)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: LeaveTypes/Delete/5
