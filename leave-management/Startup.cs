@@ -43,11 +43,18 @@ namespace leave_management
 
             //services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = true)
 
-             services.AddDefaultIdentity<Employee>()
+            // The following line enables Application Insights telemetry collection.
+            services.AddApplicationInsightsTelemetry();
+
+            // This code adds other services for your application.
+            services.AddMvc();
+
+            services.AddDefaultIdentity<Employee>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
