@@ -38,13 +38,15 @@ namespace leave_management.Repository
 
         public ICollection<LeaveAllocation> FindAll()
         {
-            var leaveAllocations = _db.LeaveAllocations.Include(q=>q.LeaveType).ToList();
+            var leaveAllocations = _db.LeaveAllocations.Include(q=>q.LeaveType)
+                .Include(q=>q.Employee).ToList();
             return leaveAllocations;
         }
 
         public LeaveAllocation FindById(int id)
         {
-            var leaveAllocations = _db.LeaveAllocations.Find(id);
+            var leaveAllocations = _db.LeaveAllocations.Include(q => q.LeaveType)
+                .Include(q => q.Employee).FirstOrDefault(q=>q.Id==id);
             return leaveAllocations;
         }
 
