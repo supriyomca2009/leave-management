@@ -12,7 +12,7 @@ namespace leave_management.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        //test
+        //test_2
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
